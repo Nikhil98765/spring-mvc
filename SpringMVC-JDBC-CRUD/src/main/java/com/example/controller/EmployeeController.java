@@ -30,14 +30,10 @@ public class EmployeeController {
         return model;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView createEmployee(@RequestParam("id") int id,@RequestParam("name") String name,
-                                       @RequestParam("department") String department , ModelAndView mv) {
+    @PostMapping(value = "/create")
+    public ModelAndView createEmployee(@RequestBody Employee employee, ModelAndView mv) {
 
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setName(name);
-        employee.setDepartment(department);
+
 
         int performed = employeeDao.save(employee);
 
@@ -54,13 +50,8 @@ public class EmployeeController {
 
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView updateEmployee(@RequestParam("id") int id, @RequestParam("name") String name,
-                                       @RequestParam("department") String department, ModelAndView mv) {
+    public ModelAndView updateEmployee(@RequestBody Employee employee,  ModelAndView mv) {
 
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setName(name);
-        employee.setDepartment(department);
 
         int performed = employeeDao.update(employee);
 

@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2>Spring MVC</h2>
-	<p><strong>Employee List is Here | <a href="create.jsp">Click for Create</a></strong></p>
+	<p><strong>Employee List is Here </strong></p>
 	<table border="1">
 		<tr>
 			<th>Id</th>
@@ -22,4 +22,4 @@
 		</c:forEach>
 	</table>
 </body>
-</html
+</html>

@@ -24,12 +24,13 @@ public class EmployeeDao {
         this.template = template;
     }
     public int save(Employee emp){
-        String sql="insert into demo.employee11(id,name,salary) values('"+emp.getId()+"',"+emp.getName()+",'"+emp.getDepartment()+"')";
-        return template.update(sql);
+        String sql="INSERT INTO employee11 (id, name, department)"
+                + " VALUES (?, ?, ?)";
+        return template.update(sql, emp.getId(), emp.getName(), emp.getDepartment());
     }
     public int update(Employee emp){
-        String sql="update demo.employee11 set name='"+emp.getId()+"', department="+emp.getDepartment()+" where id="+emp.getId()+"";
-        return template.update(sql);
+        String sql="update employee11 set name=?, department=? where id=?";
+        return template.update(sql, emp.getName(), emp.getDepartment(), emp.getId());
     }
     public int delete(int id){
         String sql="delete from employee11 where id="+id+"";

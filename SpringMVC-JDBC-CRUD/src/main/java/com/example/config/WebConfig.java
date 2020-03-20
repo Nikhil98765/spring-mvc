@@ -1,9 +1,11 @@
 package com.example.config;
 
 import com.example.dao.EmployeeDao;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,10 +18,23 @@ import java.sql.SQLException;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "com.example")
+@PropertySource("classpath:connection.properties")
 public class WebConfig {
 
     private String PREFIX = "/WEB-INF/pages/";
     private String SUFFIX = ".jsp";
+
+    @Value("${driver}")
+    private String driverName;
+
+    @Value("${url}")
+    private String url;
+
+    @Value("${user}")
+    private String userName;
+
+    @Value("${password}")
+    private String password;
 
 
     @Bean
@@ -34,12 +49,14 @@ public class WebConfig {
     }
 
     @Bean
-    DriverManagerDataSource getDataSource() throws SQLException {
+     public DriverManagerDataSource getDataSource() throws SQLException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/demo?autoReconnect=true&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("Nikhil1234$");
+
+
+        dataSource.setDriverClassName(driverName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
 
         return dataSource;
     }
